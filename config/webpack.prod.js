@@ -54,8 +54,8 @@ const config = {
           },
         }],
       },
-      {
-        test: /\.less$/i,
+      { // scss插件
+        test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, {
           loader: "css-loader",
           options: {
@@ -64,10 +64,24 @@ const config = {
           },
         },
         {
-          loader: "less-loader",
+          loader: "sass-loader",
         },
         ],
       },
+      // { // less插件
+      //   test: /\.less$/i,
+      //   use: [MiniCssExtractPlugin.loader, {
+      //     loader: "css-loader",
+      //     options: {
+      //       modules: true,
+      //       importLoaders: 1,
+      //     },
+      //   },
+      //   {
+      //     loader: "less-loader",
+      //   },
+      //   ],
+      // },
 
     ],
   },
