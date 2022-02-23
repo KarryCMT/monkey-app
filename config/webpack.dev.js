@@ -67,7 +67,7 @@ const config = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.(css|less)$/i,
         use: ["style-loader", {
           loader: "css-loader",
           options: {
