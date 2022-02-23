@@ -54,6 +54,21 @@ const config = {
           },
         }],
       },
+      {
+        test: /\.less$/i,
+        use: [MiniCssExtractPlugin.loader, {
+          loader: "css-loader",
+          options: {
+            modules: true,
+            importLoaders: 1,
+          },
+        },
+        {
+          loader: "less-loader",
+        },
+        ],
+      },
+
     ],
   },
   resolve: {

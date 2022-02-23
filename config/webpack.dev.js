@@ -74,6 +74,23 @@ const config = {
           },
         },],
       },
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          {
+            loader: "less-loader",
+          },
+        ],
+      },
     ],
   },
   resolve: {
