@@ -95,6 +95,7 @@ const config = {
             }
           },
         ],
+        include: path.resolve(__dirname, "../src/app.less"),
       },
     ],
   },

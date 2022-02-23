@@ -1,17 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from 'antd';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import './index.less';
-const App = () => (
-  <h1 className={'container'}>
-    <Button type="primary">按钮</Button>
-  </h1>
+import './app.less'
+
+const App = () => (<div />
 );
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
+
