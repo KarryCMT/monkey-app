@@ -2,7 +2,9 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { merge } = require("webpack-merge");
+const {
+  merge
+} = require("webpack-merge");
 const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
@@ -30,8 +32,7 @@ const config = {
     clean: true,
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
         use: {
@@ -47,41 +48,32 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader,  {
+        use: [MiniCssExtractPlugin.loader, {
           loader: "css-loader",
           options: {
             modules: true,
           },
         }],
       },
-      { // scss插件
-        test: /\.s[ac]ss$/i,
+      { // less插件
+        test: /\.less$/i,
         use: [MiniCssExtractPlugin.loader, {
-          loader: "css-loader",
-          options: {
-            modules: true,
-            importLoaders: 1,
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
           },
-        },
-        {
-          loader: "sass-loader",
-        },
+          {
+            loader: "less-loader",
+            options:{ 
+              lessOptions: {
+                javascriptEnabled: true
+              },
+            }
+          },
         ],
       },
-      // { // less插件
-      //   test: /\.less$/i,
-      //   use: [MiniCssExtractPlugin.loader, {
-      //     loader: "css-loader",
-      //     options: {
-      //       modules: true,
-      //       importLoaders: 1,
-      //     },
-      //   },
-      //   {
-      //     loader: "less-loader",
-      //   },
-      //   ],
-      // },
 
     ],
   },

@@ -4,7 +4,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const { merge } = require("webpack-merge");
+const {
+  merge
+} = require("webpack-merge");
 const common = require("./webpack.common.js");
 module.exports = merge(common, {
   mode: "development",
@@ -40,8 +42,7 @@ const config = {
     path: path.resolve(__dirname, "../build"),
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(ts|js)x?$/i,
         include: path.resolve(__dirname, "../src"),
         exclude: /node_modules/,
@@ -72,46 +73,29 @@ const config = {
           options: {
             modules: true,
           },
-        },],
+        }, ],
       },
-      { // scss 插件
-        test: /\.s[ac]ss$/i,
-        use: [
-          //从包含CSS的JS代码中 创建 `style` 节点
-          {
+      { // less 插件
+        test: /\.less$/i,
+        use: [{
             loader: "style-loader",
           },
-          // 将 CSS 转换为 CommonJS 格式的JS代码
           {
             loader: "css-loader",
             options: {
               modules: true,
             },
           },
-          // 将 Sass 转换为 CSS
           {
-            loader: "sass-loader",
+            loader: "less-loader",
+            options:{
+              lessOptions: {
+                javascriptEnabled: true
+              },
+            }
           },
         ],
       },
-
-      // { // less 插件
-      //   test: /\.less$/i,
-      //   use: [
-      //     {
-      //       loader: "style-loader",
-      //     },
-      //     {
-      //       loader: "css-loader",
-      //       options: {
-      //         modules: true,
-      //       },
-      //     },
-      //     {
-      //       loader: "less-loader",
-      //     },
-      //   ],
-      // },
     ],
   },
   resolve: {
@@ -141,7 +125,7 @@ const config = {
   devtool: "inline-source-map",
   devServer: {
     // contentBase: path.join(__dirname, "../build"),
-    static:'./public',
+    static: './public',
     historyApiFallback: true,
     port: 4000,
     hot: true,
