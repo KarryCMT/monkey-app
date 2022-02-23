@@ -74,26 +74,6 @@ const config = {
           },
         },],
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          //从包含CSS的JS代码中 创建 `style` 节点
-          {
-            loader: "style-loader",
-          },
-          // 将 CSS 转换为 CommonJS 格式的JS代码
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-            },
-          },
-          // 将 Sass 转换为 CSS
-          {
-            loader: "sass-loader",
-          },
-        ],
-      },
       { // scss 插件
         test: /\.s[ac]ss$/i,
         use: [
