@@ -8,4 +8,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  captchaCode: {width: 200, height: 70, resizeMode: 'contain'},
 });
