@@ -4,9 +4,14 @@ export const styles = StyleSheet.create({
   root: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  captchaCode: {width: 200, height: 70, resizeMode: 'contain'},
+  welcomeBg: {width: '100%', height: '80%', resizeMode: 'center'},
+  welcomeTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 50,
+  },
 });
