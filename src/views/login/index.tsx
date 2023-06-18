@@ -30,6 +30,8 @@ export default () => {
   const [captchaCodeImage, setCaptchaCodeImage] = useState<string>('');
   // 账号
   const [username, setAccount] = useState<string>('designer');
+  // uuid
+  const [uuid, setUuid] = useState<string>('');
   // 密码
   const [password, setPassword] = useState<string>('123213');
   // 验证码
@@ -125,13 +127,16 @@ export default () => {
     if (!canLogin) {
       return;
     }
-    UserStore.requestLogin(username, password, captcha, (success: boolean) => {
-      if (success) {
-        navigation.replace('home');
-      } else {
-        console.log('错误');
-      }
-    });
+    UserStore.requestLogin(
+      {username, password, captcha, uuid},
+      (success: boolean) => {
+        if (success) {
+          navigation.replace('home');
+        } else {
+          console.log('错误');
+        }
+      },
+    );
   };
   // 登录按钮状态
   const canLogin =
@@ -245,6 +250,7 @@ export default () => {
   const getCaptchaCodeImage = () => {
     getCodeImg().then(({data}: any) => {
       setCaptchaCodeImage(`data:image/png;base64,${data.image}`);
+      setUuid(data.uuid);
     });
   };
   //

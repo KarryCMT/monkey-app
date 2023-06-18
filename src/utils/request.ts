@@ -46,9 +46,9 @@ const requestInterceptor = (
 ): void => {
   // request拦截器
   service.interceptors.request.use(
-    config => {
-      const token = getToken();
-      const appId = getAppId();
+    async config => {
+      const token = await getToken();
+      const appId = await getAppId();
       if (token && hasToken) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -162,8 +162,8 @@ function exportRequest(opts: AxiosRequestConfig) {
   const service = baseRequest(opts);
   // request拦截器
   service.interceptors.request.use(
-    config => {
-      const token = getToken();
+    async config => {
+      const token = await getToken();
       config.responseType = 'blob';
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
