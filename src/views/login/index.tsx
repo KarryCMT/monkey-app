@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   LayoutAnimation,
@@ -16,20 +16,24 @@ import iconUnselected from '@/assets/icon/icon_unselected.png';
 import iconSelected from '@/assets/icon/icon_selected.png';
 import iconArrow from '@/assets/icon/icon_arrow.png';
 import iconWxSmall from '@/assets/icon/icon_wx_small.png';
-import iconTriangle from '@/assets/icon/icon_triangle.png';
 import iconEyeOpen from '@/assets/icon/icon_eye_open.png';
 import iconEyeClose from '@/assets/icon/icon_eye_close.png';
 import iconExchange from '@/assets/icon/icon_exchange.png';
 import iconWx from '@/assets/icon/icon_wx.png';
 import iconQQ from '@/assets/icon/icon_qq.webp';
 import iconCloseModal from '@/assets/icon/icon_close_modal.png';
-import {formatPhone, replacePhone} from '@/utils/index.ts';
+import UserStore from '@/stores/UserStore.ts';
+import {getCodeImg} from '@/apis/login/index.ts';
 export default () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
-  // 手机号
-  const [phone, setPhone] = useState<string>('');
+  // 验证码图片
+  const [captchaCodeImage, setCaptchaCodeImage] = useState<string>('');
+  // 账号
+  const [username, setAccount] = useState<string>('designer');
   // 密码
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>('123213');
+  // 验证码
+  const [captcha, setCaptcha] = useState<string>('');
   // 登录类型
   const [loginType, setLoginType] = useState<'quick' | 'input'>('quick');
   // 是否勾选隐私政策
@@ -118,34 +122,37 @@ export default () => {
     if (!check) {
       return;
     }
-    if (canLogin) {
+    if (!canLogin) {
       return;
     }
-    const account = replacePhone(phone);
-    console.log(account);
-    navigation.replace('home');
+    UserStore.requestLogin(username, password, captcha, (success: boolean) => {
+      if (success) {
+        navigation.replace('home');
+      } else {
+        console.log('错误');
+      }
+    });
   };
   // 登录按钮状态
-  const canLogin = phone?.length === 13 && password?.length === 6;
+  const canLogin =
+    username?.length > 1 && password?.length === 6 && captcha?.length === 4;
   // 账号密码登录
   const renderInputLogin = () => {
     return (
       <View style={stylesInput.root}>
         <Text style={stylesInput.pwdLoginText}>账号密码登录</Text>
-        <Text style={stylesInput.tip}>未注册的手机号登录后将自动注册</Text>
-        {/* 手机号 */}
+        <Text style={stylesInput.tip}>未注册的账号登录后将自动注册</Text>
+        {/* 账号 */}
         <View style={stylesInput.phoneLayout}>
-          <Text style={stylesInput.phoneType}>+86</Text>
-          <Image style={stylesInput.iconTriangle} source={iconTriangle} />
           <TextInput
             style={stylesInput.phoneInput}
-            placeholder="请输入手机号码"
+            placeholder="请输入账号"
             placeholderTextColor={'#bbb'}
             maxLength={13}
-            keyboardType="number-pad"
+            keyboardType="default"
             autoFocus={false}
-            value={phone}
-            onChangeText={(value: string) => setPhone(formatPhone(value))}
+            value={username}
+            onChangeText={(value: string) => setAccount(value)}
           />
         </View>
         {/* 密码 */}
@@ -169,6 +176,29 @@ export default () => {
             <Image
               style={stylesInput.iconEye}
               source={visiblePwd ? iconEyeOpen : iconEyeClose}
+            />
+          </TouchableOpacity>
+        </View>
+        {/* 验证码 */}
+        <View style={stylesInput.pwdLayout}>
+          <TextInput
+            style={[stylesInput.pwdInput, stylesInput.phoneInput]}
+            placeholder="请输入验证码"
+            placeholderTextColor={'#bbb'}
+            maxLength={4}
+            autoFocus={false}
+            value={captcha}
+            onChangeText={(value: string) => {
+              setCaptcha(value);
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              getCaptchaCodeImage();
+            }}>
+            <Image
+              style={stylesInput.captchaCodeImage}
+              source={{uri: captchaCodeImage}}
             />
           </TouchableOpacity>
         </View>
@@ -211,6 +241,16 @@ export default () => {
       </View>
     );
   };
+  // 获取验证码
+  const getCaptchaCodeImage = () => {
+    getCodeImg().then(({data}: any) => {
+      setCaptchaCodeImage(`data:image/png;base64,${data.image}`);
+    });
+  };
+  //
+  useEffect(() => {
+    getCaptchaCodeImage();
+  }, []);
   return (
     <View style={styles.root}>
       {/* 登录类型 */}

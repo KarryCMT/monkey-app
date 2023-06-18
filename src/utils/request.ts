@@ -116,6 +116,21 @@ const responseInterceptor = (service: AxiosInstance): void => {
       return res.data;
     },
     error => {
+      const {response} = error;
+      if (response) {
+        const {status} = response;
+        if (status >= 500) {
+          // 服务端报错
+        }
+        if (status === 400) {
+          // 接口参数异常
+        }
+        if (status === 401) {
+          // 登录信息过期
+        }
+      } else {
+        // 网络异常
+      }
       return Promise.reject(error); // todo 请求异常 promise loading处理
     },
   );

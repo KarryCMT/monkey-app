@@ -127,15 +127,6 @@ export const stylesInput = StyleSheet.create({
     borderBottomColor: '#ddd',
     marginTop: 28,
   },
-  phoneType: {
-    fontSize: 24,
-    color: '#bbb',
-  },
-  iconTriangle: {
-    width: 12,
-    height: 6,
-    marginLeft: 6,
-  },
   phoneInput: {
     flex: 1,
     height: 60,
@@ -227,5 +218,10 @@ export const stylesInput = StyleSheet.create({
   closeIcon: {
     width: 28,
     height: 28,
+  },
+  captchaCodeImage: {
+    width: 130,
+    height: 56,
+    resizeMode: 'contain',
   },
 });
