@@ -4,3 +4,4 @@ declare module '*.jpeg';
 declare module '*.webp';
 declare module '*.json';
 declare module '*.ts';
+declare module '*.js';

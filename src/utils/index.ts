@@ -1,4 +1,9 @@
 export * from './storage';
+export * from './type';
+export * from './request';
+export * from './crypte';
+export * from './auth';
+export * from './config';
 
 export const formatPhone = (phone: string): string => {
   const trim: string = phone.replace(/\s+/g, '');
