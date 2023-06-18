@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
 export const tabbarStyles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 56,
+    height: 52,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',

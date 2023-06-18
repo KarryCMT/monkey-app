@@ -49,6 +49,7 @@ import Mine from '@/views/mine/index.tsx';
 import Message from '@/views/message/index.tsx';
 import Publish from '@/views/publish/index.tsx';
 import Category from '@/views/category/index.tsx';
+import {SafeAreaView} from 'react-native-safe-area-context';
 //  自定义Tab
 import LeeTabs from './tabs';
 
@@ -57,59 +58,57 @@ export default () => {
   // const navigation = useNavigation<StackNavigationProp<any>>();
 
   return (
-    <View style={styles.root}>
-      <Tab.Navigator tabBar={props => <LeeTabs {...props} />}>
-        {/* 页面 首页 Home */}
-        <Tab.Screen
-          name="home"
-          component={Home}
-          options={{
-            title: '首页',
-            headerShown: false, // 去掉默认生成的导航栏标题
-            ...TransitionPresets.SlideFromRightIOS,
-          }}
-        />
-        {/* 页面 分类 Category */}
-        <Tab.Screen
-          name="category"
-          component={Category}
-          options={{
-            title: '分类',
-            headerShown: false, // 去掉默认生成的导航栏标题
-            ...TransitionPresets.SlideFromRightIOS,
-          }}
-        />
-        {/* 页面 发布 Publish */}
-        <Tab.Screen
-          name="publish"
-          component={Publish}
-          options={{
-            title: '发布',
-            headerShown: false, // 去掉默认生成的导航栏标题
-            ...TransitionPresets.SlideFromRightIOS,
-          }}
-        />
-        {/* 页面 消息 Message */}
-        <Tab.Screen
-          name="message"
-          component={Message}
-          options={{
-            title: '消息',
-            headerShown: false, // 去掉默认生成的导航栏标题
-            ...TransitionPresets.SlideFromRightIOS,
-          }}
-        />
-        {/* 页面 个人中心 Mine */}
-        <Tab.Screen
-          name="mine"
-          component={Mine}
-          options={{
-            title: '我的',
-            headerShown: false, // 去掉默认生成的导航栏标题
-            ...TransitionPresets.SlideFromRightIOS,
-          }}
-        />
-      </Tab.Navigator>
-    </View>
+    <Tab.Navigator tabBar={props => <LeeTabs {...props} />}>
+      {/* 页面 首页 Home */}
+      <Tab.Screen
+        name="home"
+        component={Home}
+        options={{
+          title: '首页',
+          headerShown: false, // 去掉默认生成的导航栏标题
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+      {/* 页面 分类 Category */}
+      <Tab.Screen
+        name="category"
+        component={Category}
+        options={{
+          title: '分类',
+          headerShown: false, // 去掉默认生成的导航栏标题
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+      {/* 页面 发布 Publish */}
+      <Tab.Screen
+        name="publish"
+        component={Publish}
+        options={{
+          title: '发布',
+          headerShown: false, // 去掉默认生成的导航栏标题
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+      {/* 页面 消息 Message */}
+      <Tab.Screen
+        name="message"
+        component={Message}
+        options={{
+          title: '消息',
+          headerShown: false, // 去掉默认生成的导航栏标题
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+      {/* 页面 个人中心 Mine */}
+      <Tab.Screen
+        name="mine"
+        component={Mine}
+        options={{
+          title: '我的',
+          headerShown: false, // 去掉默认生成的导航栏标题
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+    </Tab.Navigator>
   );
 };
