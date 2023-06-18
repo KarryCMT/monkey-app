@@ -192,6 +192,15 @@ export const stylesInput = StyleSheet.create({
     borderRadius: 28,
     backgroundColor: '#244f9e',
   },
+  loginButtonDisabled: {
+    marginTop: 20,
+    width: '100%',
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 28,
+    backgroundColor: '#ddd',
+  },
   loginButtonText: {
     fontSize: 20,
     color: 'white',

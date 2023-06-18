@@ -23,8 +23,13 @@ import iconExchange from '@/assets/icon/icon_exchange.png';
 import iconWx from '@/assets/icon/icon_wx.png';
 import iconQQ from '@/assets/icon/icon_qq.webp';
 import iconCloseModal from '@/assets/icon/icon_close_modal.png';
+import {formatPhone, replacePhone} from '@/utils/index.ts';
 export default () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
+  // 手机号
+  const [phone, setPhone] = useState<string>('');
+  // 密码
+  const [password, setPassword] = useState<string>('');
   // 登录类型
   const [loginType, setLoginType] = useState<'quick' | 'input'>('quick');
   // 是否勾选隐私政策
@@ -108,6 +113,20 @@ export default () => {
       </View>
     );
   };
+  // 登录逻辑
+  const handleLoginSubmit = () => {
+    if (!check) {
+      return;
+    }
+    if (canLogin) {
+      return;
+    }
+    const account = replacePhone(phone);
+    console.log(account);
+    navigation.replace('home');
+  };
+  // 登录按钮状态
+  const canLogin = phone?.length === 13 && password?.length === 6;
   // 账号密码登录
   const renderInputLogin = () => {
     return (
@@ -122,9 +141,11 @@ export default () => {
             style={stylesInput.phoneInput}
             placeholder="请输入手机号码"
             placeholderTextColor={'#bbb'}
-            maxLength={11}
-            keyboardType="phone-pad"
+            maxLength={13}
+            keyboardType="number-pad"
             autoFocus={false}
+            value={phone}
+            onChangeText={(value: string) => setPhone(formatPhone(value))}
           />
         </View>
         {/* 密码 */}
@@ -135,6 +156,11 @@ export default () => {
             placeholderTextColor={'#bbb'}
             maxLength={11}
             autoFocus={false}
+            secureTextEntry={!visiblePwd} // 取反显示 *
+            value={password}
+            onChangeText={(value: string) => {
+              setPassword(value);
+            }}
           />
           <TouchableOpacity
             onPress={() => {
@@ -153,7 +179,14 @@ export default () => {
           <Text style={stylesInput.forgetPwdText}>忘记密码?</Text>
         </View>
         {/* 登录按钮 */}
-        <TouchableOpacity activeOpacity={0.7} style={stylesInput.loginButton}>
+        <TouchableOpacity
+          onPress={() => {
+            handleLoginSubmit();
+          }}
+          activeOpacity={canLogin ? 0.7 : 1} // 1是没有点击效果
+          style={
+            canLogin ? stylesInput.loginButton : stylesInput.loginButtonDisabled
+          }>
           <Text style={stylesInput.loginButtonText}>登录</Text>
         </TouchableOpacity>
         {/* 用户协议 */}
