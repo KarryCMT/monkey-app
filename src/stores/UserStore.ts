@@ -45,6 +45,7 @@ class UserStore {
       callback?.(false);
     }
   };
+
   // 获取用户信息
   requestGetInfo = async (callback: (success: boolean) => void) => {
     try {

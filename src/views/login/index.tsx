@@ -131,7 +131,7 @@ export default () => {
       {username, password, captcha, uuid},
       (success: boolean) => {
         if (success) {
-          navigation.replace('home');
+          navigation.replace('main');
         } else {
           console.log('错误');
         }

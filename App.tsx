@@ -7,7 +7,7 @@ import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 // 模块
 import Welcome from './src/views/welcome'; // 启动页
 import Login from './src/views/login'; // 登录页
-import Home from './src/views/home'; // 登录页
+import Main from './src/views/main'; // Tabs
 
 const Stack = createStackNavigator();
 function App(): JSX.Element {
@@ -47,10 +47,10 @@ function App(): JSX.Element {
               ...TransitionPresets.SlideFromRightIOS,
             }}
           />
-          {/* 页面 Home */}
+          {/* 底部Tabs Main */}
           <Stack.Screen
-            name="home"
-            component={Home}
+            name="main"
+            component={Main}
             options={{
               headerShown: false, // 去掉默认生成的导航栏标题
               ...TransitionPresets.SlideFromRightIOS,

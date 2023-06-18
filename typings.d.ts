@@ -5,3 +5,4 @@ declare module '*.webp';
 declare module '*.json';
 declare module '*.ts';
 declare module '*.js';
+declare module '*.tsx';
