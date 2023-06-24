@@ -9,6 +9,7 @@ import ResizeImage from '@/components/ResizeImage/index.tsx';
 import Heart from '@/components/Heart/index.tsx';
 import TitleBar from '@/views/home/components/TitleBar.tsx';
 import Header from '@/views/home/components/Header.tsx';
+import Footer from '@/views/home/components/Footer.tsx';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 type Props = {
   remark: string;
@@ -46,11 +47,6 @@ export default observer(() => {
     HomeStore.requestHomeList();
   };
 
-  // 列表底部
-  const Footer = () => {
-    return <Text style={styles.footerText}>没有更多数据</Text>;
-  };
-
   useEffect(() => {
     HomeStore.requestHomeList();
   }, []);
@@ -61,7 +57,6 @@ export default observer(() => {
         styles.root,
         {
           paddingTop: insets.top,
-          // paddingBottom: insets.bottom,
         },
       ]}>
       <TitleBar

@@ -63,14 +63,6 @@ export const styles = StyleSheet.create({
     color: '#999',
     marginLeft: 4,
   },
-  footerText: {
-    width: '100%',
-    fontSize: 12,
-    color: '#999',
-    marginVertical: 12,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
   titleLayout: {
     width: '100%',
     height: 48,
