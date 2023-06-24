@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {getToken, getAppId, baseURL} from './index';
+import {getToken, getAppId, baseURL, clearStorage} from './index';
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 
@@ -126,6 +126,7 @@ const responseInterceptor = (service: AxiosInstance): void => {
           // 接口参数异常
         }
         if (status === 401) {
+          clearStorage();
           // 登录信息过期
         }
       } else {

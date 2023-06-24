@@ -3,10 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {tabbarStyles} from './style';
 import iconTabPublish from '@/assets/icon/icon_tab_publish.png';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {
-  ImageLibraryOptions,
-  launchImageLibrary,
-} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default ({state, descriptors, navigation}: any) => {
   const {routes, index} = state;
