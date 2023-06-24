@@ -11,9 +11,6 @@ export const styles = StyleSheet.create({
   flatList: {
     width: '100%',
     height: '100%',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 50,
   },
   container: {
     paddingTop: 6,

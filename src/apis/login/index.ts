@@ -23,6 +23,10 @@ export const getInfo = () =>
 // 退出方法
 export const logout = () => request({url: '/rabbit/logout'});
 
+// 获取所有字典
+export const getDictAll = () =>
+  request({url: '/rabbit/data/dictionary/option/all'});
+
 // 获取验证码
 export function getCodeImg() {
   return requestNoToken({

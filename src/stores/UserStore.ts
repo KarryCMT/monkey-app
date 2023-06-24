@@ -1,4 +1,4 @@
-import {login, getInfo} from '@/apis/login/index.ts';
+import {login, getInfo, getDictAll} from '@/apis/login/index.ts';
 import {encrypt, setToken, getAppId, setStorage} from '@/utils/index.ts';
 interface loginPayload {
   username: string;
@@ -85,6 +85,22 @@ class UserStore {
     } catch (error) {
       console.log(error);
       this.userInfo = null;
+      callback?.(false);
+    }
+  };
+
+  // 获取所有字典数据
+  requestDictData = async (callback: (success: boolean) => void) => {
+    try {
+      const {statusCode, data} = await getDictAll();
+      if (statusCode && statusCode === 600) {
+        await setStorage('dictList', JSON.stringify(data));
+        callback?.(true);
+      } else {
+        callback?.(false);
+      }
+    } catch (error) {
+      console.log(error);
       callback?.(false);
     }
   };

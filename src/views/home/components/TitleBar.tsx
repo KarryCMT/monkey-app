@@ -2,22 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {StyleSheet} from 'react-native';
 import iconDaily from '@/assets/icon/icon_daily.png';
+
 import iconSearch from '@/assets/icon/icon_search.png';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 type Props = {
   tab: number;
   onTabChange: (tabIndex: number) => void;
 };
 export default ({tab, onTabChange}: Props) => {
   const [tabIndex, setTabIndex] = useState<number>(1);
-  const {top}: {top: number} = useSafeAreaInsets();
 
   useEffect(() => {
     setTabIndex(tab);
   }, [tab]);
 
   return (
-    <View style={[styles.titleLayout, {marginTop: top}]}>
+    <View style={[styles.titleLayout]}>
       <TouchableOpacity style={styles.dailyButton}>
         <Image style={styles.titleIcon} source={iconDaily} />
       </TouchableOpacity>

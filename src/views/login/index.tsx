@@ -119,6 +119,11 @@ export default () => {
       </View>
     );
   };
+
+  //获取所有字典项
+  const getDictAllData = () => {
+    UserStore.requestDictData();
+  };
   // 登录逻辑
   const handleLoginSubmit = () => {
     if (!check) {
@@ -131,6 +136,7 @@ export default () => {
       {username, password, captcha, uuid},
       (success: boolean) => {
         if (success) {
+          getDictAllData();
           navigation.replace('main');
         } else {
           console.log('错误');

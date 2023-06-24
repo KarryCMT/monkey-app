@@ -8,12 +8,14 @@ import {observer} from 'mobx-react';
 import ResizeImage from '@/components/ResizeImage/index.tsx';
 import Heart from '@/components/Heart/index.tsx';
 import TitleBar from '@/views/home/components/TitleBar.tsx';
+import Header from '@/views/home/components/Header.tsx';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 type Props = {
   remark: string;
   name: string;
 };
 export default observer(() => {
-  const renderItem = ({item, index}: {item: Props; index: number}) => {
+  const renderItem = ({item}: {item: Props}) => {
     return (
       <View style={styles.item}>
         <ResizeImage
@@ -45,16 +47,23 @@ export default observer(() => {
   };
 
   // 列表底部
-  const renderFooter = () => {
+  const Footer = () => {
     return <Text style={styles.footerText}>没有更多数据</Text>;
   };
 
   useEffect(() => {
     HomeStore.requestHomeList();
   }, []);
-
+  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.root}>
+    <View
+      style={[
+        styles.root,
+        {
+          paddingTop: insets.top,
+          // paddingBottom: insets.bottom,
+        },
+      ]}>
       <TitleBar
         tab={1}
         onTabChange={(tab: number) => {
@@ -72,7 +81,8 @@ export default observer(() => {
         onRefresh={refreshNewData}
         onEndReachedThreshold={0.1} // 距离底部0.1距离时触发
         onEndReached={loadMoreData} //
-        ListFooterComponent={renderFooter}
+        ListFooterComponent={<Footer />}
+        ListHeaderComponent={<Header />}
       />
     </View>
   );

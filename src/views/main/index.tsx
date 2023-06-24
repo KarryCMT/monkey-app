@@ -1,58 +1,62 @@
 import React from 'react';
-import {Image} from 'react-native';
+// import {Image} from 'react-native';
 import {TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Icon
-import iconTabHomeNormal from '@/assets/icon/icon_tab_home_normal.png';
-import iconTabHomeSelected from '@/assets/icon/icon_tab_home_selected.png';
+// import iconTabHomeNormal from '@/assets/icon/icon_tab_home_normal.png';
+// import iconTabHomeSelected from '@/assets/icon/icon_tab_home_selected.png';
 
-import iconTabMessageNormal from '@/assets/icon/icon_tab_message_normal.png';
-import iconTabMessageSelected from '@/assets/icon/icon_tab_message_selected.png';
+// import iconTabMessageNormal from '@/assets/icon/icon_tab_message_normal.png';
+// import iconTabMessageSelected from '@/assets/icon/icon_tab_message_selected.png';
 
-import iconTabMineNormal from '@/assets/icon/icon_tab_mine_normal.png';
-import iconTabMineSelected from '@/assets/icon/icon_tab_mine_selected.png';
+// import iconTabMineNormal from '@/assets/icon/icon_tab_mine_normal.png';
+// import iconTabMineSelected from '@/assets/icon/icon_tab_mine_selected.png';
 
 // 模块
 import Home from '@/views/home/index.tsx';
 import Mine from '@/views/mine/index.tsx';
 import Message from '@/views/message/index.tsx';
 import Category from '@/views/category/index.tsx';
+import Publish from '@/views/publish/index.tsx';
 //  自定义Tab
-
+import Tabs from './components/Tabs';
 const Tab = createBottomTabNavigator();
 export default () => {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => {
-        return {
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({focused, color, size}) => {
-            let icon;
-            if (route.name === 'home') {
-              icon = focused ? iconTabHomeSelected : iconTabHomeNormal;
-            }
-            if (route.name === 'mine') {
-              icon = focused ? iconTabMineSelected : iconTabMineNormal;
-            }
-            if (route.name === 'message') {
-              icon = focused ? iconTabMessageSelected : iconTabMessageNormal;
-            }
-            if (route.name === 'category') {
-              icon = focused ? iconTabMessageSelected : iconTabMessageNormal;
-            }
-            return (
-              <Image
-                style={{
-                  width: size,
-                  height: size,
-                  tintColor: color,
-                }}
-                source={icon}
-              />
-            );
-          },
-        };
-      }}>
+      // eslint-disable-next-line react/no-unstable-nested-components
+      tabBar={props => <Tabs {...props} />}
+      // screenOptions={({route}) => {
+      //   return {
+      //     // eslint-disable-next-line react/no-unstable-nested-components
+      //     tabBarIcon: ({focused, color, size}) => {
+      //       let icon;
+      //       if (route.name === 'home') {
+      //         icon = focused ? iconTabHomeSelected : iconTabHomeNormal;
+      //       }
+      //       if (route.name === 'mine') {
+      //         icon = focused ? iconTabMineSelected : iconTabMineNormal;
+      //       }
+      //       if (route.name === 'message') {
+      //         icon = focused ? iconTabMessageSelected : iconTabMessageNormal;
+      //       }
+      //       if (route.name === 'category') {
+      //         icon = focused ? iconTabMessageSelected : iconTabMessageNormal;
+      //       }
+      //       return (
+      //         <Image
+      //           style={{
+      //             width: size,
+      //             height: size,
+      //             tintColor: color,
+      //           }}
+      //           source={icon}
+      //         />
+      //       );
+      //     },
+      //   };
+      // }}
+    >
       {/* 页面 首页 Home */}
       <Tab.Screen
         name="home"
@@ -74,7 +78,7 @@ export default () => {
         }}
       />
       {/* 页面 发布 Publish */}
-      {/* <Tab.Screen
+      <Tab.Screen
         name="publish"
         component={Publish}
         options={{
@@ -82,7 +86,7 @@ export default () => {
           headerShown: false, // 去掉默认生成的导航栏标题
           ...TransitionPresets.SlideFromRightIOS,
         }}
-      /> */}
+      />
       {/* 页面 消息 Message */}
       <Tab.Screen
         name="message"
