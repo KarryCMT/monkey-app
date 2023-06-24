@@ -1,21 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {styles} from '../style';
+import {StyleSheet} from 'react-native';
 import iconDaily from '@/assets/icon/icon_daily.png';
 import iconSearch from '@/assets/icon/icon_search.png';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 type Props = {
   tab: number;
   onTabChange: (tabIndex: number) => void;
 };
 export default ({tab, onTabChange}: Props) => {
   const [tabIndex, setTabIndex] = useState<number>(1);
+  const {top}: {top: number} = useSafeAreaInsets();
 
   useEffect(() => {
     setTabIndex(tab);
   }, [tab]);
 
   return (
-    <View style={styles.titleLayout}>
+    <View style={[styles.titleLayout, {marginTop: top}]}>
       <TouchableOpacity style={styles.dailyButton}>
         <Image style={styles.titleIcon} source={iconDaily} />
       </TouchableOpacity>
@@ -58,3 +60,55 @@ export default ({tab, onTabChange}: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  titleLayout: {
+    width: '100%',
+    height: 48,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+  },
+  titleIcon: {
+    width: 28,
+    height: 28,
+  },
+  dailyButton: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 12,
+    marginRight: 42,
+  },
+  searchButton: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 12,
+    marginLeft: 42,
+  },
+  tabButton: {
+    flex: 1,
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabText: {
+    fontSize: 15,
+    color: '#999',
+  },
+  tabSelectedText: {
+    fontSize: 17,
+    color: '#333',
+  },
+  line: {
+    width: 28,
+    height: 2,
+    backgroundColor: '#244f9e',
+    borderRadius: 1,
+    position: 'absolute',
+    bottom: 6,
+  },
+});

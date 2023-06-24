@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import {Image, Text, View} from 'react-native';
 import FlowList from '@/components/FlowList/index.js';
-import {useNavigation} from '@react-navigation/core';
-import {StackNavigationProp} from '@react-navigation/stack';
 import ItemIcon from '@/assets/images/welcome-bg.jpeg';
 import {styles} from './style';
 import HomeStore from '@/stores/HomeStore.ts';
@@ -10,12 +8,12 @@ import {observer} from 'mobx-react';
 import ResizeImage from '@/components/ResizeImage/index.tsx';
 import Heart from '@/components/Heart/index.tsx';
 import TitleBar from '@/views/home/components/TitleBar.tsx';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+type Props = {
+  remark: string;
+  name: string;
+};
 export default observer(() => {
-  const {top} = useSafeAreaInsets();
-
-  const navigation = useNavigation<StackNavigationProp<any>>();
-  const renderItem = ({item, index}: {item: object; index: number}) => {
+  const renderItem = ({item, index}: {item: Props; index: number}) => {
     return (
       <View style={styles.item}>
         <ResizeImage
@@ -56,7 +54,7 @@ export default observer(() => {
   }, []);
 
   return (
-    <View style={(styles.root, {paddingTop: top})}>
+    <View style={styles.root}>
       <TitleBar
         tab={1}
         onTabChange={(tab: number) => {
