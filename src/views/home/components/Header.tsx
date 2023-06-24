@@ -14,12 +14,21 @@ import {getDictOption} from '@/utils/index.ts';
 // 列表顶部
 export default () => {
   const [categoryOptions, setCategoryOptions] = useState<any>([]);
+
+  const [category, setCategory] = useState<any>();
   // 获取首页分类
   const categoryList = async () => {
     const data = await getDictOption('category_code');
     data.sort((a: any, b: any) => a.sortNumber - b.sortNumber);
     setCategoryOptions(data);
+    setCategory(categoryOptions.find((i: any, index: number) => index === 0));
   };
+  // 点击⌚️
+  const onCategoryPress = (item: any) => {
+    console.log(item);
+    setCategory(item);
+  };
+
   useEffect(() => {
     HomeStore.requestHomeList();
     categoryList();
@@ -31,9 +40,15 @@ export default () => {
         horizontal
         style={styles.scrollView}>
         {categoryOptions.map((item: any) => {
+          const isSelected = category?.name === item.name;
           return (
-            <TouchableOpacity key={item.name} style={styles.tabItem}>
-              <Text style={styles.tabText}>{item.name}</Text>
+            <TouchableOpacity
+              onPress={() => onCategoryPress(item)}
+              key={item.name}
+              style={styles.tabItem}>
+              <Text style={isSelected ? styles.tabSelectText : styles.tabText}>
+                {item.name}
+              </Text>
             </TouchableOpacity>
           );
         })}
@@ -78,5 +93,10 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 16,
     color: '#999',
+  },
+  tabSelectText: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: 'bold',
   },
 });

@@ -67,6 +67,7 @@ export default observer(() => {
       />
       <FlowList
         style={styles.flatList}
+        keyExtrator={(item: any) => `${item.id}`}
         data={HomeStore.homeList}
         extraData={[HomeStore.refreshing]}
         contentContainerStyle={styles.container}
