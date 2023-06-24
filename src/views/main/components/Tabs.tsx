@@ -1,8 +1,7 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {tabbarStyles} from './style';
+import {tabbarStyles} from '../style';
 import iconTabPublish from '@/assets/icon/icon_tab_publish.png';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 export default ({state, descriptors, navigation}: any) => {
@@ -27,7 +26,6 @@ export default ({state, descriptors, navigation}: any) => {
   };
 
   return (
-    // <SafeAreaView style={{width: '100%'}}>
     <View style={tabbarStyles.container}>
       {routes.map((route: any, i: number) => {
         const {options} = descriptors[route.key];
@@ -63,6 +61,5 @@ export default ({state, descriptors, navigation}: any) => {
         );
       })}
     </View>
-    // </SafeAreaView>
   );
 };

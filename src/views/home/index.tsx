@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import FlowList from '@/components/FlowList/index.js';
 import {useNavigation} from '@react-navigation/core';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -9,12 +9,13 @@ import HomeStore from '@/stores/HomeStore.ts';
 import {observer} from 'mobx-react';
 import ResizeImage from '@/components/ResizeImage/index.tsx';
 import Heart from '@/components/Heart/index.tsx';
-import iconDaily from '@/assets/icon/icon_daily.png';
-import iconSearch from '@/assets/icon/icon_search.png';
+import TitleBar from '@/views/home/components/TitleBar.tsx';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export default observer(() => {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+  const {top} = useSafeAreaInsets();
 
-  const renderItem = ({item, index}) => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const renderItem = ({item, index}: {item: object; index: number}) => {
     return (
       <View style={styles.item}>
         <ResizeImage
@@ -27,7 +28,6 @@ export default observer(() => {
         <View style={styles.nameLayout}>
           <Image style={styles.avatarImage} source={ItemIcon} />
           <Text style={styles.nameText}>{item.name}</Text>
-          {/* <Image style={styles.iconImage} source={IconHeartEmpty} /> */}
           <Heart />
           <Text style={styles.countText}>{99}</Text>
         </View>
@@ -50,25 +50,19 @@ export default observer(() => {
   const renderFooter = () => {
     return <Text style={styles.footerText}>没有更多数据</Text>;
   };
-  // 标题
-  const renderTitle = () => {
-    return (
-      <View style={styles.titleLayout}>
-        <TouchableOpacity>
-          <Image source={iconDaily} />
-          <Image source={iconSearch} />
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   useEffect(() => {
     HomeStore.requestHomeList();
   }, []);
 
   return (
-    <View style={styles.root}>
-      {renderTitle()}
+    <View style={(styles.root, {paddingTop: top})}>
+      <TitleBar
+        tab={1}
+        onTabChange={(tab: number) => {
+          console.log(tab);
+        }}
+      />
       <FlowList
         style={styles.flatList}
         data={HomeStore.homeList}
