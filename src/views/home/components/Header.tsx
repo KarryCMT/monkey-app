@@ -25,7 +25,6 @@ export default () => {
   };
   // 点击⌚️
   const onCategoryPress = (item: any) => {
-    console.log(item);
     setCategory(item);
   };
 
@@ -61,7 +60,7 @@ export default () => {
         <Image style={styles.openImg} source={iconArrow} />
       </TouchableOpacity>
 
-      <CategoryModal ref={modalRef} />
+      <CategoryModal ref={modalRef} categoryList={categoryOptions} />
     </View>
   );
 };

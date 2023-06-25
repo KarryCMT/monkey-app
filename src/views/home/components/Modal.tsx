@@ -51,8 +51,8 @@ export default forwardRef((props: Props, ref) => {
     if (!categoryList) {
       return;
     }
-    const list1 = categoryList.filter(i => i.isAdd);
-    const list2 = categoryList.filter(i => !i.isAdd);
+    const list1 = categoryList.filter(i => !i.isAdd);
+    const list2 = categoryList.filter(i => i.isAdd);
 
     setMyList(list1);
     setOtherList(list2);
