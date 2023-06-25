@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   Image,
   ScrollView,
@@ -10,11 +10,11 @@ import {
 import iconArrow from '@/assets/icon/icon_arrow.png';
 import HomeStore from '@/stores/HomeStore.ts';
 import {getDictOption} from '@/utils/index.ts';
-
+import CategoryModal, {CategoryModalRef} from '@/views/home/components/Modal';
 // 列表顶部
 export default () => {
+  const modalRef = useRef<CategoryModalRef>(null);
   const [categoryOptions, setCategoryOptions] = useState<any>([]);
-
   const [category, setCategory] = useState<any>();
   // 获取首页分类
   const categoryList = async () => {
@@ -53,9 +53,15 @@ export default () => {
           );
         })}
       </ScrollView>
-      <TouchableOpacity style={styles.openButton}>
+      <TouchableOpacity
+        onPress={() => {
+          modalRef.current?.show();
+        }}
+        style={styles.openButton}>
         <Image style={styles.openImg} source={iconArrow} />
       </TouchableOpacity>
+
+      <CategoryModal ref={modalRef} />
     </View>
   );
 };
